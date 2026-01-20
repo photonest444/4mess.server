@@ -1,0 +1,228 @@
+{
+  "users": [
+    {
+      "id": "admin-001",
+      "username": "admin",
+      "displayName": "System Administrator",
+      "password": "123",
+      "role": "ADMIN",
+      "avatarUrl": "https://picsum.photos/seed/admin/200/200",
+      "status": "online",
+      "lastSeen": 1768849306354,
+      "blockedUserIds": [],
+      "preferences": {
+        "themeColor": "blue",
+        "wallpaper": "linear-gradient(to bottom right, #0f172a, #1e293b)",
+        "bubbleStyle": "rounded",
+        "fontSize": "medium",
+        "density": "comfortable",
+        "privacyMode": false,
+        "language": "fr",
+        "censorshipEnabled": false,
+        "censorshipLevel": "medium"
+      },
+      "isBanned": false,
+      "isVerified": true,
+      "country": "US",
+      "autoMessage": "Welcome to 4 Messenger! I'm the administrator.",
+      "modifiers": [
+        "ALWAYS_ONLINE",
+        "VIP"
+      ]
+    },
+    {
+      "id": "ai-assistant",
+      "username": "gemini",
+      "displayName": "Gemini AI",
+      "password": "ai-secure-password",
+      "role": "AI",
+      "avatarUrl": "https://picsum.photos/seed/gemini/200/200",
+      "status": "online",
+      "lastSeen": 1709251200000,
+      "blockedUserIds": [],
+      "preferences": {
+        "themeColor": "blue",
+        "wallpaper": "linear-gradient(to bottom right, #0f172a, #1e293b)",
+        "bubbleStyle": "rounded",
+        "fontSize": "medium",
+        "density": "comfortable",
+        "privacyMode": false,
+        "language": "en",
+        "censorshipEnabled": false,
+        "censorshipLevel": "medium"
+      },
+      "isBanned": false,
+      "isVerified": true,
+      "country": "US",
+      "autoMessage": "Hi! I'm Gemini. Ask me anything.",
+      "modifiers": [
+        "ALWAYS_ONLINE"
+      ]
+    },
+    {
+      "id": "deepseek-assistant",
+      "username": "deepseek",
+      "displayName": "DeepSeek AI",
+      "password": "ai-secure-password",
+      "role": "AI",
+      "avatarUrl": "https://picsum.photos/seed/deepseek/200/200",
+      "status": "online",
+      "lastSeen": 1709251200000,
+      "blockedUserIds": [],
+      "preferences": {
+        "themeColor": "blue",
+        "wallpaper": "linear-gradient(to bottom right, #0f172a, #1e293b)",
+        "bubbleStyle": "rounded",
+        "fontSize": "medium",
+        "density": "comfortable",
+        "privacyMode": false,
+        "language": "en",
+        "censorshipEnabled": false,
+        "censorshipLevel": "medium"
+      },
+      "isBanned": false,
+      "isVerified": true,
+      "country": "CN",
+      "autoMessage": "Hello. I am DeepSeek AI, ready to assist you.",
+      "modifiers": [
+        "ALWAYS_ONLINE"
+      ]
+    },
+    {
+      "id": "chatgpt-assistant",
+      "username": "chatgpt",
+      "displayName": "ChatGPT",
+      "password": "ai-secure-password",
+      "role": "AI",
+      "avatarUrl": "https://picsum.photos/seed/chatgpt/200/200",
+      "status": "online",
+      "lastSeen": 1709251200000,
+      "blockedUserIds": [],
+      "preferences": {
+        "themeColor": "blue",
+        "wallpaper": "linear-gradient(to bottom right, #0f172a, #1e293b)",
+        "bubbleStyle": "rounded",
+        "fontSize": "medium",
+        "density": "comfortable",
+        "privacyMode": false,
+        "language": "en",
+        "censorshipEnabled": false,
+        "censorshipLevel": "medium"
+      },
+      "isBanned": false,
+      "isVerified": true,
+      "country": "US",
+      "autoMessage": "Hello! I'm ChatGPT. How can I help you today?",
+      "modifiers": [
+        "ALWAYS_ONLINE"
+      ]
+    },
+    {
+      "id": "user-001",
+      "username": "alice",
+      "displayName": "Alice Wonderland",
+      "password": "123",
+      "role": "USER",
+      "avatarUrl": "https://picsum.photos/seed/alice/200/200",
+      "status": "offline",
+      "lastSeen": 1709251200000,
+      "blockedUserIds": [],
+      "preferences": {
+        "themeColor": "blue",
+        "wallpaper": "linear-gradient(to bottom right, #0f172a, #1e293b)",
+        "bubbleStyle": "rounded",
+        "fontSize": "medium",
+        "density": "comfortable",
+        "privacyMode": false,
+        "language": "en",
+        "censorshipEnabled": false,
+        "censorshipLevel": "medium"
+      },
+      "isBanned": false,
+      "isVerified": false,
+      "country": "GB",
+      "modifiers": []
+    },
+    {
+      "id": "user-002",
+      "username": "bob",
+      "displayName": "Bob The Builder",
+      "password": "123",
+      "role": "USER",
+      "avatarUrl": "https://picsum.photos/seed/bob/200/200",
+      "status": "busy",
+      "lastSeen": 1709251200000,
+      "blockedUserIds": [],
+      "preferences": {
+        "themeColor": "blue",
+        "wallpaper": "linear-gradient(to bottom right, #0f172a, #1e293b)",
+        "bubbleStyle": "rounded",
+        "fontSize": "medium",
+        "density": "comfortable",
+        "privacyMode": false,
+        "language": "en",
+        "censorshipEnabled": false,
+        "censorshipLevel": "medium"
+      },
+      "isBanned": false,
+      "isVerified": false,
+      "country": "CA",
+      "modifiers": []
+    }
+  ],
+  "conversations": [],
+  "roles": [
+    {
+      "id": "ADMIN",
+      "name": "Administrator",
+      "description": "Full system access, user management, and configuration control.",
+      "color": "purple",
+      "isSystem": true
+    },
+    {
+      "id": "USER",
+      "name": "User",
+      "description": "Standard access to messaging features and profile settings.",
+      "color": "gray",
+      "isSystem": true
+    },
+    {
+      "id": "MODERATOR",
+      "name": "Moderator",
+      "description": "Can manage messages and ban abusive users.",
+      "color": "orange",
+      "isSystem": false
+    },
+    {
+      "id": "AI",
+      "name": "AI Assistant",
+      "description": "Automated artificial intelligence response system.",
+      "color": "blue",
+      "isSystem": true
+    },
+    {
+      "id": "BANNED",
+      "name": "Banned",
+      "description": "Restricted access. Cannot send messages or view chats.",
+      "color": "red",
+      "isSystem": true
+    }
+  ],
+  "ads": [
+    {
+      "id": "ad-1",
+      "name": "4 Messenger Pro",
+      "text": "Upgrade to VIP for ad-free experience!",
+      "posterUrl": "https://picsum.photos/seed/ad1/200/300",
+      "link": "https://example.com/premium"
+    },
+    {
+      "id": "ad-1768849287978",
+      "name": "abc",
+      "text": "abc",
+      "posterUrl": "abc",
+      "link": "google.com"
+    }
+  ],
+  "countryBans": []
+}
