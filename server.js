@@ -25,20 +25,17 @@ const getBestIP = () => {
 
     for (const name of Object.keys(interfaces)) {
         for (const iface of interfaces[name]) {
-            // Skip internal (127.0.0.1) and non-ipv4
             if (iface.family === 'IPv4' && !iface.internal) {
                 const parts = iface.address.split('.').map(Number);
-                
-                // Check if IP is in private ranges (RFC 1918)
                 const isPrivate = 
                     (parts[0] === 10) ||
                     (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31) ||
                     (parts[0] === 192 && parts[1] === 168);
 
                 if (!isPrivate) {
-                    publicIP = iface.address; // Found a Public IP!
+                    publicIP = iface.address; 
                 } else if (!privateIP) {
-                    privateIP = iface.address; // Keep as backup
+                    privateIP = iface.address;
                 }
             }
         }
@@ -48,24 +45,20 @@ const getBestIP = () => {
 
 const DISPLAY_HOST = getBestIP();
 
-// Initialize DB file if it doesn't exist
 if (!fs.existsSync(DB_FILE)) {
-    const initialData = {
-        users: [],
-        conversations: [],
-        roles: [],
-        ads: [],
-        countryBans: []
-    };
+    const initialData = { users: [], conversations: [], roles: [], ads: [], countryBans: [] };
     fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2));
-    console.log("Created new database.json");
 }
 
 const server = http.createServer((req, res) => {
-    // CORS headers - Allow everything
+    // Log incoming requests for debugging
+    console.log(`[${new Date().toLocaleTimeString()}] ${req.method} ${req.url}`);
+
+    // Robust CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours cache for preflight
 
     if (req.method === 'OPTIONS') {
         res.writeHead(204);
@@ -77,16 +70,13 @@ const server = http.createServer((req, res) => {
     if (req.url === '/api/database' && req.method === 'GET') {
         fs.readFile(DB_FILE, 'utf8', (err, data) => {
             if (err) {
-                console.error("Error reading DB:", err);
                 res.writeHead(500, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: 'Failed to read database' }));
                 return;
             }
             res.writeHead(200, { 
                 'Content-Type': 'application/json',
-                'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0'
+                'Cache-Control': 'no-store, no-cache, must-revalidate'
             });
             res.end(data);
         });
@@ -99,25 +89,17 @@ const server = http.createServer((req, res) => {
         req.on('data', chunk => { body += chunk.toString(); });
         req.on('end', () => {
             try {
-                // Validate JSON
                 const parsed = JSON.parse(body);
-                if (!parsed.users || !parsed.conversations) {
-                     throw new Error("Invalid DB structure");
-                }
-                
                 fs.writeFile(DB_FILE, body, (err) => {
                     if (err) {
-                        console.error('Error writing file:', err);
                         res.writeHead(500, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ error: 'Failed to write to file' }));
+                        res.end(JSON.stringify({ error: 'Write failed' }));
                         return;
                     }
-                    console.log(`[${new Date().toLocaleTimeString()}] Database saved (${body.length} bytes)`);
                     res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ success: true }));
                 });
             } catch (e) {
-                console.error("Invalid save request:", e);
                 res.writeHead(400, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: 'Invalid JSON' }));
             }
@@ -129,11 +111,12 @@ const server = http.createServer((req, res) => {
     res.end('Not Found');
 });
 
-// Bind to 0.0.0.0 to listen on all interfaces (localhost AND public IP)
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`\n🚀 Database Server running on port ${PORT}`);
+    console.log(`\n🚀 4 Messenger Server Ready`);
     console.log(`   - Local:   http://localhost:${PORT}`);
     console.log(`   - Network: http://${DISPLAY_HOST}:${PORT}`);
-    console.log(`📂 Database file: ${DB_FILE}`);
-    console.log(`\n✅ Ready for connections.`);
+    console.log(`\n💡 IF CONNECTION FAILS:`);
+    console.log(`   1. Ensure port ${PORT} is open in your Windows/Linux Firewall.`);
+    console.log(`   2. Ensure your router points port ${PORT} to this machine's IP.`);
+    console.log(`   3. Browsers block HTTP backends from HTTPS sites (Mixed Content).`);
 });
